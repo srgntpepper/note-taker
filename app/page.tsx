@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PrettyHero from "@/components/PrettyHero";
 import PrettyBento from "@/components/PrettyBento";
+import Dropzone from "@/components/Dropzone";
+import AudioRecorder from "@/components/AudioRecorder";
+import NotesViewer from "@/components/NotesViewer";
+import Actionbar from "@/components/ActionBar";
 
 type Result = {
   id: string;
@@ -22,23 +26,25 @@ export default function HomePage() {
     try {
       const fd = new FormData();
       fd.append("file", file);
-      const tr = await fetch("api/transcribe", {method: "POST", body: fd });
+      const tr = await fetch("api/transcribe", { method: "POST", body: fd });
       const { transcript } = await tr.json();
       setTranscript(transcript);
 
-      const sr = await fetch("api/summarize", {method: "POST", body: JSON.stringify({ transcript}) });
+      const sr = await fetch("api/summarize", {
+        method: "POST",
+        body: JSON.stringify({ transcript }),
+      });
       const data = await sr.json();
       setResult(data);
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <main className="container max-w-6xl mx-auto space-y-10 py-10">
-      <PrettyHero/>
-      <PrettyBento/>
+      <PrettyHero />
+      <PrettyBento />
     </main>
   );
 }
-
