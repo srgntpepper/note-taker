@@ -45,6 +45,15 @@ export default function HomePage() {
     <main className="container max-w-6xl mx-auto space-y-10 py-10">
       <PrettyHero />
       <PrettyBento />
+
+      <Card className="p-6 space-y-4">
+        <h2 className="text-xl font-semibold">Transcribe you meeting</h2>
+        <div className="flex flex-col md:flex-row gap-4 items-start">
+          <Dropzone onFile={handleFile} />
+          <AudioRecorder onUpload={handleFile} />
+          <Button variant="outline" onClick={() => { setResult(null) }} disabled={loading}>Reset</Button>
+        </div>
+      </Card>
     </main>
   );
 }
