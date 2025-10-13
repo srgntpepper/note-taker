@@ -3,7 +3,7 @@ import { format } from "date-fns";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
-export async function semmarizeTranscript(transcript: string) {
+export async function summarizeTranscript(transcript: string) {
   const today = format(new Date(), "yyy-MM-dd");
   const sys = `You are a meticulous meeting notes generator.
 Return a JSON object with keys:
