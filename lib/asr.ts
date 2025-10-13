@@ -1,9 +1,11 @@
 import OpenAI, { toFile } from "openai";
 
+// Make sure to check that the key was successfully passed.
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
+// It might be a good idea to either generate unique filenames or allow the user to name the file
 export async function transcribeAudioWebm(buffer: Buffer, filename: string) {
-  const file = await toFile(buffer, filename, { type: "audio/webm" });
+  const file = await toFile(buffer, filename, { type: "audio/webm" }); //check for other audio types, just in case
 
   // Can switch to 'gpt-4o-mini-transcribe' if enabled.
   const resp = await openai.audio.transcriptions.create({
