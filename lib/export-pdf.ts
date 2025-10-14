@@ -1,8 +1,8 @@
-import { HeartOff } from "lucide-react";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 export async function markdownToSimplePDF(md: string) {
   const pdf = await PDFDocument.create();
+  //may need a list of pages that get appended each time one is needed
   const page = pdf.addPage();
   const { width, height } = page.getSize();
   const margin = 50;
@@ -49,7 +49,7 @@ export async function markdownToSimplePDF(md: string) {
     }
   };
 
-  // naive markdown headings
+  // naive markdown headings -- We need to add functionality to add an additional page if more content is needed.
   md.split("\n").forEach((line) => {
     if (line.startsWith("# ")) {
       y -= 6;
